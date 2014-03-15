@@ -56,10 +56,17 @@ class File implements DocumentFormat
 
     public function exists($filePath)
     {
+    	$this->testDirIsSet('exists');
+    	
     	$file = new \SplFileInfo($this->dir . $filePath);
-
-    	var_dump($file->getPath());
-
     	return ($file->isFile() && $file->isReadable());
+    }
+
+
+
+    protected function testDirIsSet($method){
+    	if(is_null($this->dir)){
+    		throw new \LogicException("In order to use File::${method}() you first need to use File::setDir()");
+    	} 
     }
 }

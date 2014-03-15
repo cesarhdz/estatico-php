@@ -53,11 +53,21 @@ class FileSpec extends ObjectBehavior
     }
 
 
-    function it_should_test_file_existance(){
+    function it_should_test_file_existence(){
 
         $this->setDir(get_example_dir('documento/file/'));
 
         $filepath = 'robots.txt';
         $this->exists($filepath)->shouldReturn(true);
+    }
+
+
+    function it_should_throw_an_excetion_if_dir_id_not_defined(){
+
+        $msg = 'In order to use File::exists() you first need to use File::setDir()';
+
+        $this
+            ->shouldThrow(new \LogicException($msg))
+            ->duringExists('main.css');
     }
 }
