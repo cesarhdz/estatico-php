@@ -18,6 +18,9 @@ class File implements DocumentFormat
 	static $prefixBlackList = array('_', '.');
 
 
+	protected $dir;
+
+
     /**
      * Is Supported
      * 
@@ -38,5 +41,20 @@ class File implements DocumentFormat
         	return false;
 
         return true;
+    }
+
+
+
+    public function setDir($path){
+    	$this->dir = $path;
+    }
+
+    public function exists($filePath)
+    {
+    	$file = new \SplFileInfo($this->dir . $filePath);
+
+    	var_dump($file->getPath());
+
+    	return ($file->isFile() && $file->isReadable());
     }
 }

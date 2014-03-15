@@ -5,6 +5,8 @@ namespace spec\Estatico\Documento;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+require __DIR__ . '/../../helpers.php';
+
 class FileSpec extends ObjectBehavior
 {
     function it_is_initializable(){
@@ -47,5 +49,14 @@ class FileSpec extends ObjectBehavior
     		$this->shouldNotBeSupported($file);
 
     	}
+    }
+
+
+    function it_should_test_file_existance(){
+
+        $this->setDir(get_example_dir('documento/file/'));
+
+        $filepath = 'robots.txt';
+        $this->exists($filepath)->shouldReturn(true);
     }
 }
