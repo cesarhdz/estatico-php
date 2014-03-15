@@ -46,14 +46,14 @@ abstract class AbstractDocumentFormat implements DocumentFormat
 
     protected function hasValidExtension(\SplFileInfo $file){
         // Test if this extension is allowed
-        if(static::$extensionBlackList){
+        if(static::$extensionBlackList && is_array(static::$extensionBlackList)){
             if(in_array($file->getExtension(), static::$extensionBlackList)) 
                 return false;
         }
 
 
-        if(static::$extensionWhiteList){
-            if(! in_array($file->getExtension(), static::$extensionBlackList)) 
+        if(static::$extensionWhiteList && is_array(static::$extensionWhiteList)){
+            if(! in_array($file->getExtension(), static::$extensionWhiteList)) 
                 return false;
         }
 
