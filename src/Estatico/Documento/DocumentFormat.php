@@ -12,7 +12,7 @@ interface DocumentFormat
 	 * 
 	 * @param SplFileInfo $file
 	 */
-	function isSupported(\SplFileInfo $file);
+	function isSupported($file);
 
 	/**
 	 * SetDir Dir lo look for files

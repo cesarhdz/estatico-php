@@ -7,15 +7,17 @@ class File implements DocumentFormat
 
 	/**
 	 * ExtensionBlackList Extensions that are not supported by this format
+	 *
+	 * php and directories (or files without extension) are not allowed
 	 * @var array
 	 */
-	static $extensionBlackList = array('php');
+	static $extensionBlackList = array('', 'php');
 
 	/**
 	 * $prefixBlackList Prefixes not supported by this format
 	 * @var array
 	 */
-	static $prefixBlackList = array('_', '.');
+	static $prefixBlackList = array('_');
 
 
 	protected $dir;
@@ -24,11 +26,14 @@ class File implements DocumentFormat
     /**
      * Is Supported
      * 
-     * @param  SplFileInfo $file FileInfo to test
+     * @param  String $file FileInfo to test
      * @return boolean           Whether file is supported or not
      */
-    public function isSupported(\SplFileInfo  $file)
+    public function isSupported($uri)
     {
+    	// Trnsofrm URI into SplInfo to perform validation
+    	$file = new \SplFileInfo($uri);
+
     	// Test if this extension is allowed
         if(in_array($file->getExtension(), self::$extensionBlackList)) 
         	return false;
