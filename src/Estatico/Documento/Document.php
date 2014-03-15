@@ -2,7 +2,7 @@
 
 namespace Estatico\Documento;
 
-class File
+interface Document
 {
 
 

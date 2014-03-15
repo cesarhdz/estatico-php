@@ -5,12 +5,15 @@ namespace spec\Estatico\Documento;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+  require_once 'PHPUnit/Autoload.php';
+  require_once 'PHPUnit/Framework/Assert/Functions.php';
+
 require __DIR__ . '/../../helpers.php';
 
-class FileSpec extends ObjectBehavior
+class FileFormatSpec extends ObjectBehavior
 {
     function it_is_initializable(){
-        $this->shouldHaveType('Estatico\Documento\File');
+        $this->shouldHaveType('Estatico\Documento\FileFormat');
         $this->shouldImplement('Estatico\Documento\DocumentFormat');
     }
 
@@ -59,6 +62,13 @@ class FileSpec extends ObjectBehavior
 
         $filepath = 'robots.txt';
         $this->exists($filepath)->shouldReturn(true);
+    }
+
+
+    function it_should_return_an_instance_of_document_when_get_is_properly_called(){
+        $this->setDir(get_example_dir('documento/file/'));
+
+        assertInstanceOf('Estatico\Documento\File', $this->getWrappedObject()->get('robots.txt'));
     }
 
 
