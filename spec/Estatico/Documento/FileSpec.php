@@ -21,11 +21,31 @@ class FileSpec extends ObjectBehavior
     		'noExtension'
     	);
 
+    	echo "\n";
+
     	foreach ($paths as $path) {
     		$file = new \SplFileInfo($path);
+
     		$this->shouldBeSupported($file);
 
     		echo "\t * $path\n";
+    	}
+    }
+
+
+    function it_doesnt_support_certain_files(){
+    	$paths = array(
+    		'.dotFiles',
+    		'_privateFilesMarkedqithUndersacore.txt',
+    		'phpFiles.php'
+    	);
+
+    	foreach ($paths as $path) {
+    		$file = new \SplFileInfo($path);
+
+    		echo "\t * $path\n";
+    		$this->shouldNotBeSupported($file);
+
     	}
     }
 }
