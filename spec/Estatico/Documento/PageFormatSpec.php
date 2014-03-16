@@ -67,8 +67,21 @@ class PageFormatSpec extends ObjectBehavior
         foreach($this->getWrappedObject()->all() as $page){
             $msg = 'After PageFormat:all() the result set must contain only Pages';
             assertInstanceOf('Estatico\Documento\Page', $page, $msg);
-        }
+        }        
 
         $this->all()->shouldHaveCount(3);
+    }
+
+    function it_should_return_public_and_pivate_pages_if_include_private_is_true(){
+        $this->setDir(get_example_dir('documento/page'));
+
+        $this->setIncludePrivate(true);
+
+        foreach($this->getWrappedObject()->all() as $page){
+            $msg = 'After PageFormat:all() the result set must contain only Pages';
+            assertInstanceOf('Estatico\Documento\Page', $page, $msg);
+        }
+
+        $this->all()->shouldHaveCount(4);
     }
 }
