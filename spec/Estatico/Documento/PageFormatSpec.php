@@ -59,4 +59,16 @@ class PageFormatSpec extends ObjectBehavior
 
         $this->get('notFound.md')->shouldReturn(null);
     }
+
+    
+    function it_should_return_all_public_pages(){
+        $this->setDir(get_example_dir('documento/page'));
+
+        foreach($this->getWrappedObject()->all() as $page){
+            $msg = 'After PageFormat:all() the result set must contain only Pages';
+            assertInstanceOf('Estatico\Documento\Page', $page, $msg);
+        }
+
+        $this->all()->shouldHaveCount(3);
+    }
 }

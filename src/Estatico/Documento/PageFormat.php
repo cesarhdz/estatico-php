@@ -2,6 +2,9 @@
 
 namespace Estatico\Documento;
 
+
+use Symfony\Component\Finder\Finder;
+
 class PageFormat extends AbstractDocumentFormat
 {
 
@@ -22,7 +25,6 @@ class PageFormat extends AbstractDocumentFormat
             return $doc;
         }
     }
-
 
     function exists($filePath){
     	
@@ -51,5 +53,51 @@ class PageFormat extends AbstractDocumentFormat
 
     function getFormatExtensions(){
     	return $this->formatExtensions;
+    }
+
+    protected $resultSet;
+
+    public function all()
+    {
+        $this->resetResultSet();
+
+        // Use Sykfony Finder to look for files
+        $finder = new Finder();
+
+
+        $finder
+            // We are interested only in files
+            ->files()
+
+            // located in the curent dir
+            ->in($this->dir)
+
+            // that doesn start with undercore
+            ->notName('/^_/');
+
+        // And with the registered extensions
+        foreach ($this->getFormatExtensions() as $ext){
+            
+            $pattern = "*.${ext}";
+
+            $finder->name($pattern);
+        }
+
+        // Every matched file will be converted into page
+        foreach ($finder as $file) {
+            $this->addToResultSet(new Page($file));
+        }
+
+        return $this->resultSet;
+    }
+
+
+    protected function addToResultSet(Page $page){
+        $this->resultSet[] = $page;
+    }
+
+
+    protected function resetResultSet(){
+        $this->resultSet = array();
     }
 }
