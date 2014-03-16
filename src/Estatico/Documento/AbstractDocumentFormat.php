@@ -71,7 +71,8 @@ abstract class AbstractDocumentFormat implements DocumentFormat
     }
 
     public function setDir($path){
-    	$this->dir = $path;
+        // Ensure path has trailing slash
+    	$this->dir = rtrim($path, '/') . '/';
     }
 
     abstract function exists($filePath);
