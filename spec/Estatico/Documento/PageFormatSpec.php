@@ -5,6 +5,8 @@ namespace spec\Estatico\Documento;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+require __DIR__ . '/../../helpers.php';
+
 class PageFormatSpec extends ObjectBehavior
 {
     function it_is_initializable()
@@ -25,5 +27,19 @@ class PageFormatSpec extends ObjectBehavior
     	$this->shouldNotBeSupported('_index.html');
     	$this->shouldNotBeSupported('services/_photo.html');
     	$this->shouldNotBeSupported('services/web/_design.html');
+    }
+
+    var $pages = array(
+        'about.html',
+        'articles/typo.html',
+        'contact.html'
+    );
+
+    function it_should_test_file_existence_with_in_markdwon_by_default(){
+        $this->setDir(get_example_dir('documento/page'));
+
+        foreach ($this->pages as $page) {
+            $this->exists($page)->shouldReturn(true);
+        }
     }
 }
