@@ -42,4 +42,21 @@ class PageFormatSpec extends ObjectBehavior
             $this->exists($page)->shouldReturn(true);
         }
     }
+
+    function it_should_return_a_page_when_get_is_called(){
+        $this->setDir(get_example_dir('documento/page'));
+
+        foreach ($this->pages as $page) {
+            $file = $this->get($page);
+
+            $file->shouldImplement('Estatico\Documento\Document');
+            $file->shouldHaveType('Estatico\Documento\Page');
+        }
+    }
+
+    function it_should_return_null_if_file_does_not_exists(){
+        $this->setDir(get_example_dir('documento/page'));
+
+        $this->get('notFound.md')->shouldReturn(null);
+    }
 }

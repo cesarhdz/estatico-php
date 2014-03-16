@@ -11,24 +11,28 @@ class PageFormat extends AbstractDocumentFormat
 	protected $formatExtensions = array('md', 'markdown', 'mdown');
 
 
-    function get($dir){
+    function get($filePath){
+        $filePath = $this->getFilePathFor($filePath);
 
+        // Only if file exists a document is returned
+        if($filePath){
+            $file = new \SplFileInfo($filePath);
+            $doc = new Page($file);
+
+            return $doc;
+        }
     }
 
 
     function exists($filePath){
     	
-    	$paths = $this->pathsFor($filePath);
+    	$file = $this->getFilePathFor($filePath);
 
-    	foreach ($paths as $path){
-    	 	if(file_exists($path)) return true;
-    	}
-
-    	return false;
+    	return ($file) ? true : false;
     }
 
 
-    protected function pathsFor($relativePath){
+    protected function getFilePathFor($relativePath){
     	// Remove extension
     	$filteredPath = str_replace('.html', '', $relativePath);
 
@@ -37,10 +41,11 @@ class PageFormat extends AbstractDocumentFormat
     	$paths = array();
 
     	foreach ($this->getFormatExtensions() as $ext) {
-    		$paths[] = $basePath . '.' . $ext;
-    	}
+            $path = $basePath . '.' . $ext;
 
-    	return $paths;
+            // If file exists returns the path
+    		if(file_exists($path)) return $path;
+    	}
     }
 
 
