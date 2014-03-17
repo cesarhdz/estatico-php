@@ -13,4 +13,15 @@ class DocumentFinder
 		$this->setDir($dir);
 	}
 
+
+
+    public function setDir($path){
+        // Make sure path has trailing slash
+    	$this->dir = rtrim($path, '/') . '/';
+    }
+
+    public function getDir()
+    {
+        return $this->dir;
+    }
 }
