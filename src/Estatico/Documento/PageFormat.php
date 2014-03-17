@@ -116,4 +116,13 @@ class PageFormat extends AbstractDocumentFormat
     {
         $this->includePrivate = $value;
     }
+
+    public function relativePaths($uri, $extUnused){
+        $paths = array();
+
+        foreach ($this->getFormatExtensions() as $ext)
+            $paths[] = $uri . '.' . $ext;
+
+        return $paths;
+    }
 }

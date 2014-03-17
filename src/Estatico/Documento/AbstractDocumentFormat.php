@@ -97,8 +97,6 @@ abstract class AbstractDocumentFormat implements DocumentFormat
         // Returns the filename without any modification
         $path = ($ext) ? $fileUri . '.' . $ext : $fileUri;
 
-        var_dump($path);
-
         return array($path);
     }
 }

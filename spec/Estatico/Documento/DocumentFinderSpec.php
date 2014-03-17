@@ -6,6 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 use Estatico\Documento\FileFormat;
+use Estatico\Documento\PageFormat;
 
 require __DIR__ . '/../../helpers.php';
 
@@ -26,7 +27,7 @@ class DocumentFinderSpec extends ObjectBehavior
     }
 
     function it_test_file_existence(){
-    	$this->initialize('documento/file');
+    	$this->initialize('file');
 
     	$this->setUri('robots.txt');
     	$this->exists()->shouldReturn(true);
@@ -35,6 +36,20 @@ class DocumentFinderSpec extends ObjectBehavior
     	$this->exists()->shouldReturn(false);
     }
 
+    function it_test_page_existence(){
+    	$this->initialize('page', new PageFormat);
+
+    	$this->setUri('about.html');
+    	$this->exists()->shouldReturn(true);
+
+    	$this->setUri('404.html');
+    	$this->exists()->shouldReturn(false);
+    }
+
+
+    function it_includes_privates_files_based_on_include_private_value(){
+    	$this->beConstructedWith(new PageFormat);
+    }
 
 
 
@@ -42,9 +57,10 @@ class DocumentFinderSpec extends ObjectBehavior
     /** -----------------------------------------
      *   Helpers...
      --------------------------------------------- */
-    function initialize($dir = ''){
-    	$dir = get_example_dir($dir);
-    	$this->beConstructedWith(new FileFormat, $dir);
+    function initialize($dir = 'file', $format = null){
+    	$dir = get_example_dir('documento/' . $dir);
+    	$format = $format ?: new FileFormat;
+    	$this->beConstructedWith($format, $dir);
     }
 
 

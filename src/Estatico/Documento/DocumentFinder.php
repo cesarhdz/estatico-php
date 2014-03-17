@@ -34,7 +34,6 @@ class DocumentFinder
 
         foreach ($relativePaths as $uri) {
         	$file = $this->dir . $uri;
-
         	return file_exists($file);
         }
     }
