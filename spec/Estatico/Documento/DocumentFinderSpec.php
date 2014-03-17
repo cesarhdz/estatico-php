@@ -48,7 +48,13 @@ class DocumentFinderSpec extends ObjectBehavior
 
 
     function it_includes_privates_files_based_on_include_private_value(){
-    	$this->beConstructedWith(new PageFormat);
+    	$this->initialize('file');
+
+        $this->setUri('_private_file.txt');
+        $this->exists()->shouldReturn(false);
+
+        $this->allowPrivateFiles(true);
+        $this->exists()->shouldReturn(true);
     }
 
 
