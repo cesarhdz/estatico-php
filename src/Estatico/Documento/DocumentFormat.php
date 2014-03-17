@@ -30,4 +30,10 @@ interface DocumentFormat
 	 * @return Boolean           Whether the file exists or not
 	 */
 	function exists($filePath);
+
+
+
+
+
+	function relativePaths($fileUri, $ext);
 }

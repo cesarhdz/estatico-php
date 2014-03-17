@@ -25,7 +25,23 @@ class DocumentFinderSpec extends ObjectBehavior
     	$this->getDir()->shouldEndsWith('noSlash/');
     }
 
+    function it_test_file_existence(){
+    	$this->initialize('documento/file');
 
+    	$this->setUri('robots.txt');
+    	$this->exists()->shouldReturn(true);
+
+    	$this->setUri('doesnt-exists.txt');
+    	$this->exists()->shouldReturn(false);
+    }
+
+
+
+
+
+    /** -----------------------------------------
+     *   Helpers...
+     --------------------------------------------- */
     function initialize($dir = ''){
     	$dir = get_example_dir($dir);
     	$this->beConstructedWith(new FileFormat, $dir);

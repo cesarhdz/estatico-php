@@ -90,4 +90,15 @@ abstract class AbstractDocumentFormat implements DocumentFormat
     		throw new \LogicException("In order to use File::${method}() you first need to use File::setDir()");
     	} 
     }
+
+
+
+    function relativePaths($fileUri, $ext){
+        // Returns the filename without any modification
+        $path = ($ext) ? $fileUri . '.' . $ext : $fileUri;
+
+        var_dump($path);
+
+        return array($path);
+    }
 }
