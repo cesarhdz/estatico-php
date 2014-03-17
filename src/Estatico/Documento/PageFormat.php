@@ -29,4 +29,11 @@ class PageFormat extends AbstractDocumentFormat
     public function format(\SplFileInfo $fileInfo){
         return new Page($fileInfo);
     }
+
+    public function constraints($finder){
+        // Add allowed extensions
+        foreach ($this->getFormatExtensions() as $ext){
+            $finder->name('*.' . $ext);
+        }
+    }
 }
