@@ -17,18 +17,20 @@ class FileFormatSpec extends ObjectBehavior
         $this->shouldImplement('Estatico\Documento\DocumentFormat');
     }
 
-    function it_can_support_almost_any_file_type_because_is_the_default_format(){
+    function it_supports_almost_any_file_type_because_is_the_default_format(){
 
     	$paths = array(
     		'vendor/assets/bundle/css/style.css',
-    		'javascript/main.js',
-    		'robots.txt',
+    		'_request_starting_with_underscores.txt',
+            'javascript/main.js',
+            'robots.txt',
             '.htaccess'
-    	);
+        );
 
-    	foreach ($paths as $path) {
-    		$this->shouldBeSupported($path);
-    	}
+        foreach ($paths as $path) {
+            // var_dump($path);
+            $this->shouldBeSupported($path);
+        }
     }
 
     function it_doesnt_support_dirs(){
@@ -38,9 +40,7 @@ class FileFormatSpec extends ObjectBehavior
 
 
     function it_doesnt_support_certain_files(){
-    	$paths = array(
-    		'_privateFilesMarkedqithUndersacore.txt',
-            'nested/private/_files.txt',
+        $paths = array(
     		'phpFiles.php'
     	);
 
