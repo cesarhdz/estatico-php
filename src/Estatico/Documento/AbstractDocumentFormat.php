@@ -70,24 +70,6 @@ abstract class AbstractDocumentFormat implements DocumentFormat
         return ($prefix === static::PRIVATE_PREFIX);
     }
 
-    public function setDir($path){
-        // Ensure path has trailing slash
-    	$this->dir = rtrim($path, '/') . '/';
-    }
-
-
-    protected function pathFor($path){
-    	return $this->dir . $path;
-    }
-
-    protected function testDirIsSet($method){
-    	if(is_null($this->dir)){
-    		throw new \LogicException("In order to use File::${method}() you first need to use File::setDir()");
-    	} 
-    }
-
-
-
     function relativePaths($fileUri, $ext){
         // Returns the filename without any modification
         $path = ($ext) ? $fileUri . '.' . $ext : $fileUri;
