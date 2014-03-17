@@ -14,25 +14,6 @@ interface DocumentFormat
 	 */
 	function isSupported($file);
 
-	/**
-	 * SetDir Dir lo look for files
-	 * @param String $path 
-	 * @return void
-	 */
-	function setDir($path);
-
-
-	/**
-	 * Exists
-	 *
-	 * Test if file exists
-	 * @param  String $filePath A file path
-	 * @return Boolean           Whether the file exists or not
-	 */
-	function exists($filePath);
-
-
-
 
 
 	function relativePaths($fileUri, $ext);

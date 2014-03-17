@@ -75,11 +75,6 @@ abstract class AbstractDocumentFormat implements DocumentFormat
     	$this->dir = rtrim($path, '/') . '/';
     }
 
-    abstract function exists($filePath);
-
-
-    abstract function get($filePath);
-
 
     protected function pathFor($path){
     	return $this->dir . $path;

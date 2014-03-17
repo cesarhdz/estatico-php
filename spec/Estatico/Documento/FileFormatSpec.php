@@ -26,12 +26,8 @@ class FileFormatSpec extends ObjectBehavior
             '.htaccess'
     	);
 
-    	echo "\n";
-
     	foreach ($paths as $path) {
     		$this->shouldBeSupported($path);
-
-    		echo "\t * $path\n";
     	}
     }
 
@@ -49,35 +45,7 @@ class FileFormatSpec extends ObjectBehavior
     	);
 
     	foreach ($paths as $path) {
-    		echo "\t * $path\n";
     		$this->shouldNotBeSupported($path);
-
     	}
-    }
-
-
-    function it_should_test_file_existence(){
-
-        $this->setDir(get_example_dir('documento/file/'));
-
-        $filepath = 'robots.txt';
-        $this->exists($filepath)->shouldReturn(true);
-    }
-
-
-    function it_should_return_an_instance_of_document_when_get_is_properly_called(){
-        $this->setDir(get_example_dir('documento/file/'));
-
-        assertInstanceOf('Estatico\Documento\File', $this->getWrappedObject()->get('robots.txt'));
-    }
-
-
-    function it_should_throw_an_excetion_if_dir_id_not_defined(){
-
-        $msg = 'In order to use File::exists() you first need to use File::setDir()';
-
-        $this
-            ->shouldThrow(new \LogicException($msg))
-            ->duringExists('main.css');
     }
 }
