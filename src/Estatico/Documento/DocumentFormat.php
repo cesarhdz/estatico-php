@@ -36,4 +36,19 @@ interface DocumentFormat
 
 
 	function relativePaths($fileUri, $ext);
+
+
+	/**
+	 * Constraint finder
+	 * @param  Finder $finder 
+	 * @return void         
+	 */
+	function constraints($finder);
+
+	/**
+	 * Converts an SplFileInfo into a Document
+	 * @param  SplFileInfo $file 
+	 * @return Document
+	 */
+	function format(\SplFileInfo $file);
 }

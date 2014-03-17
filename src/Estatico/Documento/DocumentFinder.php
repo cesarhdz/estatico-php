@@ -2,6 +2,8 @@
 
 namespace Estatico\Documento;
 
+use Symfony\Component\Finder\Finder;
+
 class DocumentFinder
 {
 
@@ -15,6 +17,9 @@ class DocumentFinder
 
 	protected $includePrivateFiles;
 
+	protected $finder;
+	protected $resultset;
+
 	function __construct(DocumentFormat $format, $dir){
 		$this->format = $format;
 		$this->setDir($dir);
@@ -24,7 +29,7 @@ class DocumentFinder
 
 
 
-    public function setDir($path){
+    protected function setDir($path){
         // Make sure path has trailing slash
     	$this->dir = rtrim($path, '/') . '/';
     }
@@ -32,6 +37,25 @@ class DocumentFinder
     public function getDir()
     {
         return $this->dir;
+    }
+
+    /**
+     * Look for all files in a given dir
+     * 
+     * @return array An array containing all matched files
+     */
+    public function all()
+    {
+    	$this->initFinder();
+
+    	$this->format->constraints($this->finder);
+
+    	// Every matched file will be converted into page
+        foreach ($this->finder as $file) {
+            $this->resultset[] = $this->format->format($file);
+        }
+
+        return $this->resultset;
     }
 
     /**
@@ -88,6 +112,22 @@ class DocumentFinder
 	 */
     public function allowPrivateFiles($val)
     {
-        $this->includePrivateFiles = !($val);
+        $this->includePrivateFiles = (boolean) $val;
+    }
+
+
+
+
+    protected function initFinder(){
+        // Init finder
+        $this->finder = new Finder;
+        $this->finder->files()->in($this->dir);
+    	
+        // Limit to public files if include privates is false
+        if(! $this->includePrivateFiles)
+            $this->finder->notName('/^' . self::PRIVATE_PREFIX . '/');
+
+        // Init resultset
+        $this->resultset = array();
     }
 }

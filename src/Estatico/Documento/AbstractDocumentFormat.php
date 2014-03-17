@@ -99,4 +99,12 @@ abstract class AbstractDocumentFormat implements DocumentFormat
 
         return array($path);
     }
+
+
+    function constraints($finder){
+        // By deafult no constraints are applied
+    }
+
+
+    abstract function format(\SplFileInfo $format);
 }

@@ -125,4 +125,8 @@ class PageFormat extends AbstractDocumentFormat
 
         return $paths;
     }
+
+    public function format(\SplFileInfo $fileInfo){
+        return new Page($fileInfo);
+    }
 }

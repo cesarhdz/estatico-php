@@ -47,14 +47,35 @@ class DocumentFinderSpec extends ObjectBehavior
     }
 
 
-    function it_includes_privates_files_based_on_include_private_value(){
+    function it_includes_privates_files_based_on_include_private_files_value(){
     	$this->initialize('file');
 
         $this->setUri('_private_file.txt');
-        $this->exists()->shouldReturn(false);
+        
+        $this->allowPrivateFiles(false);
+        $this->exists()->shouldReturn(true);
+
 
         $this->allowPrivateFiles(true);
-        $this->exists()->shouldReturn(true);
+        $this->exists()->shouldReturn(false);
+
+    }
+
+
+    function it_should_read_all_files_in_a_gievn_dir(){
+        $this->initialize('page', new PageFormat);
+
+        $result = $this->getWrappedObject()->all();
+
+        // var_dump($result);
+
+        foreach($result as $page){
+            $msg = 'After PageFormat:all() the result set must contain only Pages';
+            assertInstanceOf('Estatico\Documento\Page', $page, $msg);
+        }        
+
+        $this->all()->shouldHaveCount(3);
+
     }
 
 

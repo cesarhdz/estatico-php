@@ -32,4 +32,8 @@ class FileFormat extends AbstractDocumentFormat
     	// Return the document	
     	return $doc;
     }
+
+    public function format(\SplFileInfo $fileInfo){
+        return new File($fileInfo);
+    }
 }
