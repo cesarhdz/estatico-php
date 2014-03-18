@@ -26,4 +26,19 @@ class PageCollectionSpec extends ObjectBehavior
     		->during('__construct', array('not a valid dir', 'name'));
 
     }
+
+
+    function it_should_have_two_formats_file_and_page(){
+    	// setup
+    	$this->beConstructedWith(__DIR__, 'name');
+
+    	//when
+    	$this->getFormats()->shouldHaveCount(2);
+    	$formats = $this->getWrappedObject()->getFormats();
+    	
+    	//then
+    	assertContains('pageFormat',$formats);
+    	assertContains('fileFormat',$formats);
+
+    }
 }

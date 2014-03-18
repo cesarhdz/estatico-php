@@ -39,4 +39,9 @@ class PageCollection
 
     	$this->dir = $dir;
     }
+
+    public function getFormats()
+    {
+        return array('pageFormat', 'fileFormat');
+    }
 }
