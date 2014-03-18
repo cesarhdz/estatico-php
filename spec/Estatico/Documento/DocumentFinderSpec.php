@@ -5,8 +5,8 @@ namespace spec\Estatico\Documento;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-use Estatico\Documento\FileFormat;
-use Estatico\Documento\PageFormat;
+use Estatico\Documento\Format\FileFormat;
+use Estatico\Documento\Format\PageFormat;
 
 require __DIR__ . '/../../helpers.php';
 

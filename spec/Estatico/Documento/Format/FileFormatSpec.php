@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Estatico\Documento;
+namespace spec\Estatico\Documento\Format;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -8,13 +8,13 @@ use Prophecy\Argument;
   require_once 'PHPUnit/Autoload.php';
   require_once 'PHPUnit/Framework/Assert/Functions.php';
 
-require __DIR__ . '/../../helpers.php';
+require __DIR__ . '/../../../helpers.php';
 
 class FileFormatSpec extends ObjectBehavior
 {
     function it_is_initializable(){
-        $this->shouldHaveType('Estatico\Documento\FileFormat');
-        $this->shouldImplement('Estatico\Documento\DocumentFormat');
+        $this->shouldHaveType('Estatico\Documento\Format\FileFormat');
+        $this->shouldImplement('Estatico\Documento\Format\DocumentFormat');
     }
 
     function it_supports_almost_any_file_type_because_is_the_default_format(){

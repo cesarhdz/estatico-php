@@ -1,6 +1,6 @@
 <?php
 
-namespace Estatico\Documento;
+namespace Estatico\Documento\Format;
 
 class FileFormat extends AbstractDocumentFormat
 {

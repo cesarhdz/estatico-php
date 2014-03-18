@@ -3,6 +3,7 @@
 namespace Estatico\Documento;
 
 use Symfony\Component\Finder\Finder;
+use Estatico\Documento\Format\DocumentFormat;
 
 class DocumentFinder
 {

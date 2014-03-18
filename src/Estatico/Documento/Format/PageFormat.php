@@ -1,6 +1,8 @@
 <?php
 
-namespace Estatico\Documento;
+namespace Estatico\Documento\Format;
+
+use Estatico\Documento\Page;
 
 
 class PageFormat extends AbstractDocumentFormat
