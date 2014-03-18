@@ -7,6 +7,7 @@ class UriConvention
 
 	const DEFAULT_COLLECTION_NAME = 'pages';
 	const DEFAULT_FILE_NAME = 'index';
+	const DEFAULT_EXTENSION = 'html';
 
 	protected $uri;
 
@@ -66,7 +67,7 @@ class UriConvention
     	$extPattern = $ext ? ".${ext}" : '';
 
     	// Set fileName and Extension
-    	$this->extension = $ext;
+    	$this->extension = $ext ?: self::DEFAULT_EXTENSION;
         $this->fileName = $file->getBaseName($extPattern) ?: self::DEFAULT_FILE_NAME;
     }
 

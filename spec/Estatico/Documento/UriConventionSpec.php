@@ -55,4 +55,12 @@ class UriConventionSpec extends ObjectBehavior
     	$this->getExtension()->shouldReturn('txt');
     }
 
+    function it_should_have_html_as_default_extension_in_case_no_one_is_provided(){
+    	//when
+    	$this->beConstructedWith('/');
+
+    	//then
+    	$this->getExtension()->shouldReturn('html');
+    }
+
 }
