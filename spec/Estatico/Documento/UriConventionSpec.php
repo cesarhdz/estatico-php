@@ -46,4 +46,13 @@ class UriConventionSpec extends ObjectBehavior
     	$this->getFileName()->shouldReturn('about');
     }
 
+
+    function it_should_take_the_extension_of_the_uri_and_save(){
+    	//when
+    	$this->beConstructedWith('any.txt');
+
+    	//then
+    	$this->getExtension()->shouldReturn('txt');
+    }
+
 }

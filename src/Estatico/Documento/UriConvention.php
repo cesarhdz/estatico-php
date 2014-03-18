@@ -12,6 +12,7 @@ class UriConvention
 
 	protected $CollectionName;
 	protected $fileName;
+	protected $extension;
 
 
     public function __construct($uri)
@@ -52,18 +53,26 @@ class UriConvention
     /**
      * Filenamed is guessed using SplFileInfo
      * if no one is found, then it fallsback to DEFAULT_FILE_NAME
+     * It also sets the extension
      * 		
      * @return void
      */
     public function guessFileName()
     {	
     	$file = new \SplFileInfo($this->uri);
+    	
+    	// We need the pattern to remove the extension from the file
     	$ext = $file->getExtension();
-
     	$extPattern = $ext ? ".${ext}" : '';
 
-
+    	// Set fileName and Extension
+    	$this->extension = $ext;
         $this->fileName = $file->getBaseName($extPattern) ?: self::DEFAULT_FILE_NAME;
     }
 
+
+    public function getExtension()
+    {
+        return $this->extension;
+    }
 }
