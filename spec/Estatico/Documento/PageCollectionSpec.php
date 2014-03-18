@@ -17,4 +17,13 @@ class PageCollectionSpec extends ObjectBehavior
         $this->getDir()->shouldReturn(__DIR__);
         $this->getName()->shouldReturn('name');
     }
+
+
+    function it_should_be_constructed_with_a_real_dir_or_an_exception_is_thrown(){
+    	//setup
+    	$this
+    		->shouldThrow('\InvalidArgumentException')
+    		->during('__construct', array('not a valid dir', 'name'));
+
+    }
 }
