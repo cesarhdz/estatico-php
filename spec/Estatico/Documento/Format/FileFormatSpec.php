@@ -5,9 +5,6 @@ namespace spec\Estatico\Documento\Format;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-  require_once 'PHPUnit/Autoload.php';
-  require_once 'PHPUnit/Framework/Assert/Functions.php';
-
 require __DIR__ . '/../../../helpers.php';
 
 class FileFormatSpec extends ObjectBehavior
