@@ -37,4 +37,13 @@ class UriConventionSpec extends ObjectBehavior
     		 ->shouldReturn('index');
     }
 
+
+    function it_should_take_the_filename_and_save_wihtout_extension(){
+    	//when
+    	$this->beConstructedWith('/about.html');
+
+    	//then
+    	$this->getFileName()->shouldReturn('about');
+    }
+
 }

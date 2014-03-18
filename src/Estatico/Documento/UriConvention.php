@@ -9,7 +9,7 @@ class UriConvention
 	const DEFAULT_FILE_NAME = 'index';
 
 	protected $uri;
-	
+
 	protected $CollectionName;
 	protected $fileName;
 
@@ -49,10 +49,21 @@ class UriConvention
 
     }
 
-
+    /**
+     * Filenamed is guessed using SplFileInfo
+     * if no one is found, then it fallsback to DEFAULT_FILE_NAME
+     * 		
+     * @return void
+     */
     public function guessFileName()
-    {
-        $this->fileName = self::DEFAULT_FILE_NAME;
+    {	
+    	$file = new \SplFileInfo($this->uri);
+    	$ext = $file->getExtension();
+
+    	$extPattern = $ext ? ".${ext}" : '';
+
+
+        $this->fileName = $file->getBaseName($extPattern) ?: self::DEFAULT_FILE_NAME;
     }
 
 }
