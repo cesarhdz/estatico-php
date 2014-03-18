@@ -5,10 +5,13 @@ namespace Estatico\Documento;
 class UriConvention
 {
 
-	const DEFAULT_COLLECTION = 'root';
+	const DEFAULT_COLLECTION_NAME = 'pages';
+	const DEFAULT_FILE_NAME = 'index';
 
 	protected $uri;
+	
 	protected $CollectionName;
+	protected $fileName;
 
 
     public function __construct($uri)
@@ -16,6 +19,7 @@ class UriConvention
         $this->uri = $uri;
 
         $this->guessCollectionName();
+        $this->guessFileName();
     }
 
     /**
@@ -27,6 +31,10 @@ class UriConvention
         return $this->collectionName;
     }
 
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
 
 
     protected function guessCollectionName(){
@@ -37,8 +45,14 @@ class UriConvention
 		// If we have only one level, collectionName is set to default
 		// if it has more chunks, then collection name is the firstone    	
     	$this->collectionName = (count($chunks) <= 1) ?
-    		self::DEFAULT_COLLECTION : $chunks[0];
+    		self::DEFAULT_COLLECTION_NAME : $chunks[0];
 
+    }
+
+
+    public function guessFileName()
+    {
+        $this->fileName = self::DEFAULT_FILE_NAME;
     }
 
 }

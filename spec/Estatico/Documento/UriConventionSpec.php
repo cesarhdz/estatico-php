@@ -14,8 +14,8 @@ class UriConventionSpec extends ObjectBehavior
     	$this->beConstructedWith('/');
 
     	//then
-    	$defaultCollection = UriConvention::DEFAULT_COLLECTION;
-    	$this->getCollectionName()->shouldReturn($defaultCollection);
+    	$this->getCollectionName()
+    		 ->shouldReturn('pages');
     }
 
 
@@ -25,6 +25,16 @@ class UriConventionSpec extends ObjectBehavior
 
     	//then
     	$this->getCollectionName()->shouldReturn('collection');
+    }
+
+
+    function it_should_have_a_default_file_name(){
+    	//when
+    	$this->beConstructedWith('/');
+
+    	//then
+    	$this->getFileName()
+    		 ->shouldReturn('index');
     }
 
 }
