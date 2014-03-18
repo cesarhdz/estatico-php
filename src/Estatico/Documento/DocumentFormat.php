@@ -14,20 +14,22 @@ interface DocumentFormat
 	 */
 	function isSupported($file);
 
-	/**
-	 * SetDir Dir lo look for files
-	 * @param String $path 
-	 * @return void
-	 */
-	function setDir($path);
+
+
+	function relativePaths($fileUri, $ext);
 
 
 	/**
-	 * Exists
-	 *
-	 * Test if file exists
-	 * @param  String $filePath A file path
-	 * @return Boolean           Whether the file exists or not
+	 * Constraint finder
+	 * @param  Finder $finder 
+	 * @return void         
 	 */
-	function exists($filePath);
+	function constraints($finder);
+
+	/**
+	 * Converts an SplFileInfo into a Document
+	 * @param  SplFileInfo $file 
+	 * @return Document
+	 */
+	function format(\SplFileInfo $file);
 }

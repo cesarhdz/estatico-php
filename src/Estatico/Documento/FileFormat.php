@@ -13,23 +13,7 @@ class FileFormat extends AbstractDocumentFormat
 	 */
 	static $extensionBlackList = array('', 'php');
 
-    public function exists($filePath)
-    {
-    	$this->testDirIsSet('exists');
-    	
-    	$file = new \SplFileInfo($this->pathFor($filePath));
-    	return ($file->isFile() && $file->isReadable());
-    }
-
-
-    public function get($filePath){
-    	if(! $this->exists($filePath)) return null;
-    	
-    	// Get FileInfo	
-    	$file = new \SplFileInfo($this->pathFor($filePath));
-        $doc = new File($file);
-
-    	// Return the document	
-    	return $doc;
+    public function format(\SplFileInfo $fileInfo){
+        return new File($fileInfo);
     }
 }

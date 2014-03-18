@@ -5,39 +5,49 @@ namespace Estatico\Documento;
 abstract class AbstractDocumentFormat implements DocumentFormat
 {
 
-	/**
-	 * ExtensionBlackList Extensions that are not supported by this format
-	 *
-	 * php and directories (or files without extension) are not allowed
-	 * @var array
-	 */
-	static $extensionBlackList;
+    /**
+     * ExtensionBlackList Extensions that are not supported by this format
+     *
+     * php and directories (or files without extension) are not allowed
+     * @var array
+     */
+    static $extensionBlackList;
     static $extensionWhiteList;
 
-    const PRIVATE_PREFIX = '_';
-
-	protected $dir;
-
+    /**
+     * Converts an SplFileInfo into a Document
+     *
+     * Children must implement this method
+     * 
+     * @param  SplFileInfo $fileInfo 
+     * @return Document    Document ready to be parsed or rendered
+     */
+    abstract function format(\SplFileInfo $fileInfo);
 
     /**
-     * Is Supported
+     * Tests if the format supports the given uri
      * 
      * @param  String $file FileInfo to test
      * @return boolean           Whether file is supported or not
      */
     public function isSupported($uri)
     {
-    	// Trnsofrm URI into SplInfo to perform validation
-    	$file = new \SplFileInfo($uri);
+        // Trnsofrm URI into SplInfo to perform validation
+        $file = new \SplFileInfo($uri);
 
         return $this->isValid($file);
     }
 
-
+    /**
+     * Constraints search before finder trigger search
+     * @param  Finder $finder 
+     * @return void         
+     */
+    function constraints($finder){
+        // By deafult no constraints are applied
+    }
 
     protected function isValid(\SplFileInfo $file){
-        if($this->isPrivate($file)) return false;
-
         if(! $this->hasValidExtension($file)) return false;
 
         return true;
@@ -62,32 +72,10 @@ abstract class AbstractDocumentFormat implements DocumentFormat
     }
 
 
-    protected function isPrivate(\SplFileInfo $file){
-        // Only the first character is important to check
-        $prefix =  $file->getFileName()[0];
+    function relativePaths($fileUri, $ext){
+        // Returns the filename without any modification
+        $path = ($ext) ? $fileUri . '.' . $ext : $fileUri;
 
-        // If it starts with the prefix, it won't pass
-        return ($prefix === static::PRIVATE_PREFIX);
-    }
-
-    public function setDir($path){
-        // Ensure path has trailing slash
-    	$this->dir = rtrim($path, '/') . '/';
-    }
-
-    abstract function exists($filePath);
-
-
-    abstract function get($filePath);
-
-
-    protected function pathFor($path){
-    	return $this->dir . $path;
-    }
-
-    protected function testDirIsSet($method){
-    	if(is_null($this->dir)){
-    		throw new \LogicException("In order to use File::${method}() you first need to use File::setDir()");
-    	} 
+        return array($path);
     }
 }
