@@ -11,4 +11,6 @@ class Document implements interfaces\Document
 
 	function getContent(){}
 
+	function getMeta(){}
+
 }

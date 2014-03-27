@@ -23,6 +23,13 @@ interface Document
 	function getUri();
 
 	/**
+	 * Retrieves Metadata
+	 *
+	 * @return DocumentMeta
+	 */
+	function getMeta();
+
+	/**
 	 * Retrieves file conted already parsed
 	 * @return String content
 	 */	
