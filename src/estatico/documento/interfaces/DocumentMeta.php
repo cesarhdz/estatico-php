@@ -30,6 +30,14 @@ interface DocumentMeta extends \Serializable
 	 */
 	function getPath();
 
+
+	/**
+	 * Formatter ClassName that can be used to build a complete document
+	 * 
+	 * @return String classname
+	 */
+	function getFormatter();
+
 	/**
 	 * Checks if a variable is defined
 	 * 

@@ -13,6 +13,9 @@ class DocumentMeta implements interfaces\DocumentMeta
 	function getPath(){}
 
 
+	function getFormatter(){}
+
+
 	function has($key){}
 
 
