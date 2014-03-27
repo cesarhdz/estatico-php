@@ -1,0 +1,12 @@
+* [33m840bd20[m[33m ([1;36mHEAD[m[33m, [1;32mfeature/documento[m[33m)[m DocumentFormat interface and implementation added
+* [33m06732dc[m Document interface: path, uri and content getters added
+* [33m75b121d[m Document added
+[31m|[m * [33mb4d7087[m[33m ([1;32mfeature/document-crawler[m[33m)[m DocumentCrawler is constructed with a valid dir
+[31m|[m * [33me23d93f[m symfony/finder & Virtual File stream added to composer.json
+[31m|[m[31m/[m  
+* [33mc3c26ae[m[33m ([1;32mdev[m[33m)[m phpspec.yml renamed to phpspec.yml.dist
+[32m|[m * [33m2c24a2a[m[33m ([1;31morigin/feature/collection-holder[m[33m)[m CollectionHolder  should be created with a root dir
+[32m|[m * [33mfa00614[m CollectionHolder added
+[32m|[m * [33mcc9c023[m[33m ([1;31morigin/develop[m[33m)[m DocumentFormats moved to Estatico/Document/Format namespace
+[32m|[m *   [33mefe75f1[m Merge branch 'feature/documento-collection' into develop
+[32m|[m [34m|[m[35m\[m  
