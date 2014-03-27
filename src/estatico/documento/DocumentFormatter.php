@@ -6,5 +6,7 @@ class DocumentFormatter implements interfaces\DocumentFormatter
 {
 	function isSupported(SplFileInfo $file){}
 
-	function format(SplFileInfo $file){}
+	function extractMetaData(SplFileInfo $file){}
+
+	function buildDocument(interfaces\DocumentMeta $metaData){}
 }

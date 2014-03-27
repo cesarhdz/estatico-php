@@ -16,11 +16,21 @@ interface DocumentFormatter
 	function isSupported(\SplFileInfo $file);
 
 	/**
-	 * Read file info and returns a document
-	 * 
-	 * @param  SplFileInfo $file [description]
-	 * @return DocumentMetadata 
+	 * Retrieve metada of the file, it can be used to be indexed
+	 *
+	 * @param SplFileInfo Reads the file and extracts metadata
+	 * @return DocumentMeta
 	 */
-	function format(\SplFileInfo $file);
+	function extractMetaData(\SplFileInfo $file);
+
+
+	/**
+	 * Retrieves a complete Document when a DocumentMetaData is given
+	 *
+	 * @param DocumentMeta $metaData metadata usually retrieved from index
+	 * @return Document 
+	 */
+	function buildDocument(DocumentMeta $metaData);
+
 
 }
